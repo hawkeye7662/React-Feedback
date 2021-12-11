@@ -22,19 +22,20 @@ function FeedbackForm() {
     }
   }, [feedbackEdit]);
 
-  const handleTextChange = (e) => {
-    if (text === '') {
+  const handleTextChange = ({ target: { value } }) => {
+    //get the value
+    if (value === '') {
       setBtnDisabled(true);
       setMessage(null);
-    } else if (text !== '' && text.trim().length <= 10) {
-      setMessage('Text must be atleast 10 characters');
+    } else if (value !== '' && value.trim().length < 10) {
+      //check for less than
+      setMessage('Text must be at least 10 characters');
       setBtnDisabled(true);
     } else {
       setMessage(null);
       setBtnDisabled(false);
     }
-
-    setText(e.target.value);
+    setText(value);
   };
 
   const handleSubmit = (e) => {
